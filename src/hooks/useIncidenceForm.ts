@@ -1,6 +1,6 @@
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { IncidenceFormValues } from "@/types";
+import { IncidenceCriticality, IncidenceFormValues } from "@/types";
 import { incidenceFormSchema } from "@/lib";
 
 export function useIncidenceForm() {
@@ -9,8 +9,8 @@ export function useIncidenceForm() {
     defaultValues: {
       title: "",
       description: "",
-      criticality: "low",
-      status: "open",
+      criticality: IncidenceCriticality.Low,
+      status: true,
     },
   });
 

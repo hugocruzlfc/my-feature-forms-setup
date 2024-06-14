@@ -1,21 +1,44 @@
+
+import { useIncidenceForm } from "@/hooks";
 import {
   Form,
   FormControl,
   FormField,
   FormItem,
   FormLabel,
-  FormMessage,
-} from "@/components/ui/form";
-import { Button } from "../ui/button";
-import { Input } from "@/components/ui/input";
-import { useIncidenceForm } from "@/hooks";
+  FormMessage, RadioGroup, RadioGroupItem, Input, Button,
+  Card,
+  CardHeader,
+  CardTitle,
+  CardDescription,
+  CardContent,
+  CardFooter
+} from "../ui";
+import { IncidenceCriticality } from "@/types";
+import { Switch } from "../ui/switch";
 
 export function IncidenceForm() {
   const { form, onSubmit } = useIncidenceForm();
 
+
+  //   function onSubmit(data: z.infer<typeof FormSchema>) {
+  //   toast({
+  //     title: "You submitted the following values:",
+  //     description: (
+  //       <pre className="mt-2 w-[340px] rounded-md bg-slate-950 p-4">
+  //         <code className="text-white">{JSON.stringify(data, null, 2)}</code>
+  //       </pre>
+  //     ),
+  //   })
+  // }
+  //className="bg-white px-5 py-10 rounded-lg w-1/2 border border-gray-200 shadow-gray-300">
   return (
-    <div className="bg-slate-100 px-5 py-10 rounded-lg w-1/2">
-      <h2 className="text-2xl font-bold text-center mb-8">Incidence Form</h2>
+    <Card className="w-[380px]">
+       <CardHeader>
+        <CardTitle>Incidence Form</CardTitle>
+        <CardDescription>This is a form demo</CardDescription>
+      </CardHeader>
+       <CardContent className="grid gap-4">
       <Form {...form}>
         <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
           <FormField
@@ -27,9 +50,6 @@ export function IncidenceForm() {
                 <FormControl>
                   <Input {...field} placeholder="Title..." />
                 </FormControl>
-                {/* <FormDescription>
-                  This is your public display name.
-                </FormDescription> */}
                 <FormMessage />
               </FormItem>
             )}
@@ -47,11 +67,75 @@ export function IncidenceForm() {
               </FormItem>
             )}
           />
+          <FormField
+            control={form.control}
+            name="criticality"
+            render={({ field }) => (
+              <FormItem className="space-y-3">
+                <FormLabel>Criticality Level</FormLabel>
+                <FormControl>
+                  <RadioGroup
+                    onValueChange={field.onChange}
+                    defaultValue={field.value}
+                    className="flex flex-row space-y-1 space-x-3"
+                  >
+                    <FormItem className="flex items-center space-x-1 space-y-0">
+                      <FormControl>
+                        <RadioGroupItem value={IncidenceCriticality.High} />
+                      </FormControl>
+                      <FormLabel className="font-normal">
+                        High
+                      </FormLabel>
+                    </FormItem>
+                    <FormItem className="flex items-center space-x-1 space-y-0">
+                      <FormControl>
+                        <RadioGroupItem value={IncidenceCriticality.Medium} />
+                      </FormControl>
+                      <FormLabel className="font-normal">
+                        Medium
+                      </FormLabel>
+                    </FormItem>
+                    <FormItem className="flex items-center space-x-1 space-y-0">
+                      <FormControl>
+                        <RadioGroupItem value={IncidenceCriticality.Low}/>
+                      </FormControl>
+                      <FormLabel className="font-normal">Low</FormLabel>
+                    </FormItem>
+                  </RadioGroup>
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+            <FormField
+              control={form.control}
+              name="status"
+              render={({ field }) => (
+                <FormItem className="flex flex-row items-center gap-5 ">
+                  <FormLabel>Status</FormLabel>
+                  <FormControl>
+                    <Switch
+                      checked={field.value}
+                      onCheckedChange={field.onChange}
+                    />
+                  </FormControl>
+                </FormItem>
+              )}
+            />
           <Button type="submit" className="bg-red-400">
             Submit
           </Button>
         </form>
-      </Form>
-    </div>
+        </Form>
+      </CardContent>
+      <CardFooter>
+        <CardDescription>This is simple use case for a basic incidence!</CardDescription>
+        </CardFooter>
+    </Card>
   );
 }
+
+
+
+
+
