@@ -2,7 +2,7 @@ import { IncidenceForm } from "./components/forms";
 
 function App() {
   return (
-    <main className="container p-10">
+    <main className="container p-20 flex flex-row justify-center">
       <IncidenceForm />
     </main>
   );

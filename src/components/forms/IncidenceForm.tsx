@@ -20,18 +20,7 @@ import { Switch } from "../ui/switch";
 export function IncidenceForm() {
   const { form, onSubmit } = useIncidenceForm();
 
-
-  //   function onSubmit(data: z.infer<typeof FormSchema>) {
-  //   toast({
-  //     title: "You submitted the following values:",
-  //     description: (
-  //       <pre className="mt-2 w-[340px] rounded-md bg-slate-950 p-4">
-  //         <code className="text-white">{JSON.stringify(data, null, 2)}</code>
-  //       </pre>
-  //     ),
-  //   })
-  // }
-  //className="bg-white px-5 py-10 rounded-lg w-1/2 border border-gray-200 shadow-gray-300">
+  
   return (
     <Card className="w-[380px]">
        <CardHeader>
@@ -117,6 +106,7 @@ export function IncidenceForm() {
                     <Switch
                       checked={field.value}
                       onCheckedChange={field.onChange}
+                     className="bg-slate-300"
                     />
                   </FormControl>
                 </FormItem>
